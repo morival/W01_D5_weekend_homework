@@ -1,18 +1,17 @@
 # WRITE YOUR FUNCTIONS HERE
-# import pdb
+import pdb
 
 def get_pet_shop_name(shop):
     return shop["name"]
 
 
-def get_total_cash(admin_cash):
-    return admin_cash["admin"]["total_cash"]
+def get_total_cash(shop):
+    return shop["admin"]["total_cash"]
 
 
-def add_or_remove_cash(admin_cash, added_removed_cash):
-#     pdb.set_trace()
-    admin_cash["admin"]["total_cash"] += added_removed_cash
-    return admin_cash
+def add_or_remove_cash(shop, added_removed_cash):
+    shop["admin"]["total_cash"] += added_removed_cash
+    return shop
 
 def get_pets_sold(pets_sold):
     return pets_sold["admin"]["pets_sold"]
@@ -64,3 +63,15 @@ def customer_can_afford_pet(customer, new_pet):
     else:
         return False
 
+def sell_pet_to_customer(shop, pet_name, customer):
+    for pet in shop["pets"]:
+
+        if pet["name"] == pet_name["name"]:
+            if customer["cash"] >= pet["price"]:
+                return add_pet_to_customer(customer, pet_name), increase_pets_sold(shop, get_customer_pet_count(customer)), remove_customer_cash(customer, pet["price"]), add_or_remove_cash(shop, pet["price"])
+                
+                # customer["cash"] -= pet["price"],
+                # shop["admin"]["total_cash"] += pet["price"],
+                # shop["pets"].remove(pet),
+                # customer["pets"].append(pet),
+                # shop["admin"]["pets_sold"]
