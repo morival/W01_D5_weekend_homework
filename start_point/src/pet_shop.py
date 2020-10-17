@@ -65,13 +65,8 @@ def customer_can_afford_pet(customer, new_pet):
 
 def sell_pet_to_customer(shop, pet_name, customer):
     for pet in shop["pets"]:
-
-        if pet["name"] == pet_name["name"]:
-            if customer["cash"] >= pet["price"]:
+        if pet == pet_name:
+            if customer_can_afford_pet(customer, pet_name):
                 return add_pet_to_customer(customer, pet_name), increase_pets_sold(shop, get_customer_pet_count(customer)), remove_customer_cash(customer, pet["price"]), add_or_remove_cash(shop, pet["price"])
-                
-                # customer["cash"] -= pet["price"],
-                # shop["admin"]["total_cash"] += pet["price"],
-                # shop["pets"].remove(pet),
-                # customer["pets"].append(pet),
-                # shop["admin"]["pets_sold"]
+          
+
